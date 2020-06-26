@@ -75,6 +75,7 @@ class List extends Component {
           </Grid>
           <Grid item xs>
             <InfiniteCalendar
+            width='94%'
               Component={withMultipleDates(Calendar)}
               selected={DateArr}
               interpolateSelection={defaultMultipleDateInterpolation}
