@@ -46,7 +46,6 @@ class List extends Component {
   // isBefore(date, today) ? '#EC6150' : '#559FFF'
   render() {
     const { data, loading } = this.state;
-    const today = new Date();
     var DateArr = this.state.data && this.state.data.events && this.getDateArr();
     if (loading) {
       return <div>Loading...</div>;
