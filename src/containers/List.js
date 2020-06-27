@@ -23,7 +23,6 @@ class List extends Component {
   async componentDidMount() {
     const movies = await fetch('../../assets/data.json');
     const moviesJSON = await movies.json();
-    console.log('eventsJson: ',moviesJSON)
     if (moviesJSON) {
       this.setState({
         data: moviesJSON,
@@ -34,25 +33,20 @@ class List extends Component {
 
   getDateArr() {
     var output = [];
-    this.state.data.events.map((event, i) => (
+    this.state.data.events.map((event) => (
         output = [...output, event.start, event.end]
     ))
-    console.log('Output: ',output)
     return output;
   }
 
   getColour(date, DateArr) {
-    console.log('Color: date-> ',date);
     var index = DateArr.indexOf(date);
-    console.log('Index: ',index)
-    console.log('Color index: ',Math.floor(index/2))
     return this.state.arrColor[Math.floor(index/2)];
   }
   // isBefore(date, today) ? '#EC6150' : '#559FFF'
   render() {
     const { data, loading } = this.state;
     const today = new Date();
-    const lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
     var DateArr = this.state.data && this.state.data.events && this.getDateArr();
     if (loading) {
       return <div>Loading...</div>;
@@ -63,7 +57,7 @@ class List extends Component {
         <Grid container spacing={3}>
           <Grid item xs={6}>
             {data.events.map((event,i) => (
-              <Card style={{margin: '2%', backgroundColor: this.state.arrColor[i]}}>
+              <Card key={i} style={{margin: '2%', backgroundColor: this.state.arrColor[i]}}>
                 <CardContent>
                 <div>
                   <h2 style={{color: 'white'}}>{`#${event.name}`}</h2>
